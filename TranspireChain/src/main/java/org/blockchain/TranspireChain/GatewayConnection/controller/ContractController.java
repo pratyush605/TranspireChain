@@ -18,7 +18,7 @@ import java.security.cert.CertificateException;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping("contract")
+@RequestMapping("/contract")
 public class ContractController {
     public final GatewayConnection gatewayConnection;
 

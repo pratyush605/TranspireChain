@@ -44,10 +44,7 @@ public class MySecurityConfig {
                 .httpBasic(Customizer.withDefaults())
 //                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(authfilter, UsernamePasswordAuthenticationFilter.class)
-<<<<<<< HEAD
-=======
                 .addFilterAfter(roleFilter, JwtAuthenticationFilter.class)
->>>>>>> 845aa6c (Initial commit)
                 .build();
     }
     @Bean

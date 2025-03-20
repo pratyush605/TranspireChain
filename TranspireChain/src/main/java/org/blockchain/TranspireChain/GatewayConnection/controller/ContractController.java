@@ -4,18 +4,12 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
-<<<<<<< HEAD
-=======
 import jakarta.servlet.http.HttpServletRequest;
->>>>>>> 845aa6c (Initial commit)
 import org.blockchain.TranspireChain.GatewayConnection.Service.ContractConnection;
 import org.blockchain.TranspireChain.GatewayConnection.Service.GatewayConnection;
 import org.blockchain.TranspireChain.GatewayConnection.model.Fund;
 import org.hyperledger.fabric.client.*;
-<<<<<<< HEAD
-=======
 import org.springframework.http.ResponseEntity;
->>>>>>> 845aa6c (Initial commit)
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -64,30 +58,18 @@ public class ContractController {
     }
 
     @PostMapping("/init")
-<<<<<<< HEAD
-    public String initLeger(@RequestBody Fund fund) throws EndorseException, CommitException, SubmitException, CommitStatusException {
-        return contractConnection.initLedger(
-=======
     public ResponseEntity<?> initLeger(@RequestBody Fund fund, HttpServletRequest request) throws EndorseException, CommitException, SubmitException, CommitStatusException {
         String role = (String) request.getAttribute("userRole");
         if (!"governmentEmployee".equals(role)) {
             return ResponseEntity.status(403).body("Access Denied: Only Government Employees allowed");
         }
         return ResponseEntity.ok(contractConnection.initLedger(
->>>>>>> 845aa6c (Initial commit)
                 contract,
                 fund.getTransactionId(),
                 fund.getDepartmentId(),
                 fund.getEmployeeId(),
                 fund.getContractorId(),
                 fund.getAmount(),
-<<<<<<< HEAD
-                fund.getProjectName());
-    }
-
-    @PostMapping("/addFund")
-    public Fund addFund(@RequestBody Fund fund) throws EndorseException, CommitException, SubmitException, CommitStatusException {
-=======
                 fund.getProjectName()
         ));
     }
@@ -98,7 +80,6 @@ public class ContractController {
         if(!"contractor".equals(role) && !"governmentEmployee".equals(role)){
             return ResponseEntity.status(403).body("Access Denied: Only Government Employees allowed");
         }
->>>>>>> 845aa6c (Initial commit)
         byte[] json = contractConnection.addFund(
                 contract,
                 fund.getTransactionId(),
@@ -106,18 +87,12 @@ public class ContractController {
                 fund.getEmployeeId(),
                 fund.getContractorId(),
                 fund.getAmount(),
-<<<<<<< HEAD
-                fund.getProjectName());
-
-        return gson.fromJson(new String(json, StandardCharsets.UTF_8), Fund.class);
-=======
                 fund.getProjectName()
         );
 
         return ResponseEntity.ok(
                 gson.fromJson(new String(json, StandardCharsets.UTF_8), Fund.class) // Return type is Fund.
         );
->>>>>>> 845aa6c (Initial commit)
     }
 
     @GetMapping("/readFund")
@@ -127,15 +102,11 @@ public class ContractController {
     }
 
     @PostMapping("updateFund")
-<<<<<<< HEAD
-    public Fund updateFund(@RequestBody Fund fund) throws EndorseException, CommitException, SubmitException, CommitStatusException {
-=======
     public ResponseEntity<?> updateFund(@RequestBody Fund fund, HttpServletRequest request) throws EndorseException, CommitException, SubmitException, CommitStatusException {
         String role = (String) request.getAttribute("userRole");
         if(!"contractor".equals(role) && !"governmentEmployee".equals(role)){
             return ResponseEntity.status(403).body("Access Denied: Only Government Employees allowed");
         }
->>>>>>> 845aa6c (Initial commit)
         byte[] json = contractConnection.updateFund(
                 contract,
                 fund.getTransactionId(),
@@ -143,15 +114,6 @@ public class ContractController {
                 fund.getEmployeeId(),
                 fund.getContractorId(),
                 fund.getAmount(),
-<<<<<<< HEAD
-                fund.getProjectName());
-        return gson.fromJson(new String(json, StandardCharsets.UTF_8), Fund.class);
-    }
-
-    @PostMapping("/deleteFund")
-    public String deleteFund(@RequestParam("transactionId") String transactionId) throws GatewayException {
-        return contractConnection.deleteFundById(contract, transactionId);
-=======
                 fund.getProjectName()
         );
         return ResponseEntity.ok(
@@ -168,7 +130,6 @@ public class ContractController {
         return ResponseEntity.ok(
                 contractConnection.deleteFundById(contract, transactionId)
         );
->>>>>>> 845aa6c (Initial commit)
     }
 
     @GetMapping("/getAllFunds")
@@ -200,8 +161,4 @@ public class ContractController {
         byte[] json = contractConnection.getAllFundsByContractorId(contract, contractorId);
         return gson.fromJson(new String(json, StandardCharsets.UTF_8), fundListType);
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 845aa6c (Initial commit)

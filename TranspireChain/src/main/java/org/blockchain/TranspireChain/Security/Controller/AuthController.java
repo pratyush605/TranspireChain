@@ -12,9 +12,18 @@ import org.blockchain.TranspireChain.Security.Responses.LoginResponse;
 import org.blockchain.TranspireChain.Security.Service.EmailAuthService;
 import org.blockchain.TranspireChain.Security.Service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
+<<<<<<< HEAD
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+=======
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.concurrent.TimeUnit;
+
+>>>>>>> 845aa6c (Initial commit)
 @RestController
 @RequestMapping("/user")
 public class AuthController {
@@ -23,6 +32,11 @@ public class AuthController {
     private JwtService jwtService;
     @Autowired
     private EmailAuthService authService;
+<<<<<<< HEAD
+=======
+    @Autowired
+    private StringRedisTemplate redisTemplate;
+>>>>>>> 845aa6c (Initial commit)
     @PostMapping("/viewerSignup")
     public ResponseEntity<Viewer> registerViewer(@RequestBody RegisterViewerDTO viewerDTO) {
         Viewer viewer = authService.viewerSignUp(viewerDTO);
@@ -45,6 +59,10 @@ public class AuthController {
     public ResponseEntity<?> login(@RequestBody LoginDTO loginDTO){
         String jwt = null;
         Object user = authService.login(loginDTO);
+<<<<<<< HEAD
+=======
+        String role;
+>>>>>>> 845aa6c (Initial commit)
         if(user != null){
             if(user instanceof Viewer viewer && viewer.isEnabled()){
                 jwt = jwtService.createToken(
@@ -54,6 +72,10 @@ public class AuthController {
                         viewer.getPhoneNumber(),
                         viewer.getAddress()
                 );
+<<<<<<< HEAD
+=======
+                role = "viewer";
+>>>>>>> 845aa6c (Initial commit)
             }
             else if(user instanceof Contractor contractor && contractor.isEnabled()){
                 Department department = contractor.getDepartment();
@@ -66,6 +88,10 @@ public class AuthController {
                         department.getDepartmentId(),
                         department.getDepartment()
                 );
+<<<<<<< HEAD
+=======
+                role = "contractor";
+>>>>>>> 845aa6c (Initial commit)
             }
             else if (user instanceof GovernmentEmployee employee && employee.isEnabled()){
                 Department department = employee.getDepartment();
@@ -78,9 +104,17 @@ public class AuthController {
                         department.getDepartmentId(),
                         department.getDepartment()
                 );
+<<<<<<< HEAD
             } else {
                 return ResponseEntity.badRequest().body("Email Not Verified!!! Please verify the email.");
             }
+=======
+                role = "governmentEmployee";
+            } else {
+                return ResponseEntity.badRequest().body("Email Not Verified!!! Please verify the email.");
+            }
+            redisTemplate.opsForValue().set(jwt, role, 30, TimeUnit.MINUTES);
+>>>>>>> 845aa6c (Initial commit)
         }
         LoginResponse loginResponse = new LoginResponse(jwt, 1000*60*30);
         return ResponseEntity.ok(loginResponse);

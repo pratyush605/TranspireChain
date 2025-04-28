@@ -1,0 +1,42 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: Arial, sans-serif;
+    background: url('./Images/signup.jpg') no-repeat center center/cover;
+    height: 100vh;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.container {
+    width: 90%;
+    max-width: 400px;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+input, select, button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+}
+button {
+    background: blue;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+button:hover {
+    background: darkblue;
+}
+.nav-link {
+    background: gray;
+    color: white;
+}
+.nav-link:hover {
+    background: darkgray;
+}

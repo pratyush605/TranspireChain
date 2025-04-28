@@ -1,0 +1,55 @@
+
+.container {
+    margin: 0 auto;
+    max-width: 600px;
+    padding: 50px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive styles for screens smaller than 600px */
+@media only screen and (max-width: 600px) {
+.container {
+width: 100%;
+}
+}
+
+/* Responsive styles for screens between 601px and 900px */
+@media only screen and (min-width: 601px) and (max-width: 900px) {
+header, section, footer {
+padding: 15px;
+}
+}
+
+/* Responsive styles for screens larger than 900px */
+@media only screen and (min-width: 901px) {
+header, section, footer {
+padding: 30px;
+}
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+input[type="submit"] {
+    background-color: rgb(48, 68, 107);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+background-color: rgb(88, 56, 250); /* Change the color on hover */
+}

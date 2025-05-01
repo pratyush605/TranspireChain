@@ -117,4 +117,20 @@ public class AuthController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @GetMapping("/logout")
+    public ResponseEntity<?> logout(HttpServletRequest request) {
+        try{
+            final String authenticationHeader = request.getHeader("Authorization");
+            String jwt = "";
+            if(authenticationHeader != null && authenticationHeader.startsWith("Bearer ")) {
+                jwt = authenticationHeader.substring(7);
+            }
+            redisTemplate.delete(jwt);
+            return ResponseEntity.ok("LOGOUT SUCCESSFUL");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+    
 }

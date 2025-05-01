@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { governmentEmployeeSignup } from "../../controller/authController";
 
-import '../../public/css/signup.css';
+import '../../assets/css/signup.css';
 
 const GovernmentEmployeeSignup = () => {
   const [id, setId] = useState("");

@@ -1,14 +1,15 @@
 import { useState } from "react";
 import {login} from "../controller/authController";
-import "../../public/css/login.css";
+import "../assets/css/login.css";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const dispatch = useDispatch();
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    login(email, password);
+    login(email, password, dispatch);
     //redirect using useNvigate of react router
   };
     return (

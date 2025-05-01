@@ -1,18 +1,26 @@
 import { useState } from "react";
 import {verifyEmail, resendEmail} from "../../controller/authController";
-import "../../../public/css/verifyEmail.css";
+import "../../assets/css/verifyEmail.css";
 
 const VerifyEmail = () => {
-    const [action, setAction] = useState<string>('');
+  const [action, setAction] = useState<string>('');
   const [email, setEmail] = useState("");
   const [verificationCode, setVerificationCode] = useState("");
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     if(action === 'verify'){
+        if (!email || !verificationCode) {
+            alert('All fields are required');
+            return;
+        }
         verifyEmail({email, verificationCode});
         //redirect using useNvigate of react router
     } else {
+        if (!email) {
+            alert('Kindly fill the email and then click resend!!');
+            return;
+        }
         resendEmail(email);
     }
   };

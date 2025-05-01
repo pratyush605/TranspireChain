@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { viewerSignup } from "../../controller/authController";
 
-import '../../public/css/signup.css';
+import '../../assets/css/signup.css';
 
 const ViewerSignup = () => {
   const [username, setUsername] = useState("");

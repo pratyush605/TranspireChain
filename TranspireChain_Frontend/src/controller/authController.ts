@@ -1,10 +1,8 @@
-import { useDispatch } from "react-redux";
 import axiosInstance, { setAuthToken } from "../config/axiosConfig";
 import { handleLogin, handleLogout } from "../redux/role/roleSlice";
 import { AppDispatch } from "../redux/store";
 
-const dispatch: AppDispatch = useDispatch();
-const login = async (email:string, password:string) => {
+const login = async (email:string, password:string, dispatch: AppDispatch) => {
     try {
       const response = await axiosInstance.post("/user/login", { email, password });
 
@@ -21,7 +19,7 @@ const login = async (email:string, password:string) => {
     }
 };
 
-const logout = async () => {
+const logout = async (dispatch: AppDispatch) => {
   const response = await axiosInstance.get("/user/logout");
   if(response.status !== 200){
     throw new Error("Logout failed");
@@ -52,14 +50,14 @@ const governmentEmployeeSignup = async (userData: Object) => {
 }
 
 const verifyEmail = async (userData: Object) => {
-  const response = await axiosInstance.post("user/employeeSignup", userData);
+  const response = await axiosInstance.post("user/verify", userData);
   if(response.status !== 200){
     throw new Error("Signup failed with status " + response.status);
   }
 }
 
 const resendEmail = async (email: string) => {
-  const response = await axiosInstance.post("user/employeeSignup", email);
+  const response = await axiosInstance.post("user/resend?email="+email);
   if(response.status !== 200){
     throw new Error("Signup failed with status " + response.status);
   }

@@ -23,7 +23,7 @@ const GovernmentEmployeeSignup = () => {
     <div className="container">
         <h1>Signup</h1>
         <form onSubmit={handleSubmit}>
-            <input type="text" id="id" name="id" placeholder="Contractor Id" value={username} onChange={(event) => setId(event.target.value)} required />
+            <input type="text" id="id" name="id" placeholder="Government Employee Id" value={username} onChange={(event) => setId(event.target.value)} required />
             <br />
             <input type="text" id="username" name="username" placeholder="username" value={username} onChange={(event) => setUsername(event.target.value)} required />
             <br />

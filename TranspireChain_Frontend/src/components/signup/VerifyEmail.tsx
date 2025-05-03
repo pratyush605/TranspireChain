@@ -1,6 +1,34 @@
 import { useState } from "react";
 import {verifyEmail, resendEmail} from "../../controller/authController";
-import "../../assets/css/verifyEmail.css";
+import stylex from "@stylexjs/stylex";
+
+const signupStyle = stylex.create({
+    bg_img: {
+        position: 'relative',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '43rem',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundImage: "url('https://wallpapercave.com/wp/wp6509773.jpg')",
+    },
+    content: {
+        textAlign: 'center',
+        padding: '60px 32px',
+        height: '65%',
+        width: '30%',
+        backgroundColor: 'rgba(255,255,255,0.09)',
+        boxShadow: '-1px 4px 28px 0px rgba(0,0,0,0.75)',
+    },
+    header: {
+        color: 'black',
+        fontSize: '33px',
+        fontWeight: '600',
+        margin: '0 0 35px 0',
+        fontFamily: "'Montserrat',sans-serif",
+    },
+  });
 
 const VerifyEmail = () => {
   const [action, setAction] = useState<string>('');
@@ -25,18 +53,24 @@ const VerifyEmail = () => {
     }
   };
     return (
-        <div className="container">
-            <h2>Verify!!</h2>
-            <form onSubmit={handleSubmit}>
-                <input type="email" name="email" placeholder="Email" onChange={(e) => {
-                    setEmail(e.target.value);
-                }} required/>
-                <input name="verificationCode" placeholder="verificatoinCode" onChange={e => {
-                    setVerificationCode(e.target.value);
-                }}/>
-                <button type="submit" onClick={() => {setAction('verify')}}>verify</button>
-                <button type="submit" onClick={() => {setAction('resend')}}>resend</button>
-            </form>
+        <div className={stylex(signupStyle.bg_img)}>
+            <div className={stylex(signupStyle.content)}>
+                <header className={stylex(signupStyle.header)}>Verify!!!</header>
+                <form onSubmit={handleSubmit}>
+                    <div className="border border-3 border-danger rounded form-group">
+                        <input className="form-control" type="email" name="email" placeholder="Email" onChange={(e) => {
+                            setEmail(e.target.value);
+                        }}/>
+                    </div>
+                    <div className="border border-3 border-danger rounded mt-4 form-group">
+                        <input className="form-control" name="verificationCode" placeholder="verificatoinCode" onChange={e => {
+                            setVerificationCode(e.target.value);
+                        }}/>
+                    </div>
+                    <button className="mt-4 w-100 btn btn-danger" type="submit" onClick={() => {setAction('verify')}}>verify</button>
+                    <button className="mt-4 w-100 btn btn-danger" type="submit" onClick={() => {setAction('resend')}}>resend</button>
+                </form>
+            </div>
         </div>
     );
 }

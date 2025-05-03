@@ -4,15 +4,14 @@ import ContractorSignup from "../components/signup/ContractorSignup";
 import GovernmentEmployeeSignup from "../components/signup/GovernmentEmpolyeeSignup";
 import ViewerSignup from "../components/signup/ViewerSignup";
 import Login from "../components/Login";
-import { logout } from "../controller/authController";
 import Navbar from "../components/Navbar";
-import { useDispatch } from "react-redux";
+import VerifyEmail from "../components/signup/VerifyEmail";
 
 const RootLayout = () => {
   return (
-    <div className="app">
+    <div className="d-block app">
       <Navbar />
-      <main className="pages">
+      <main className="d-block pages">
         <Outlet />
       </main>
     </div>
@@ -40,19 +39,16 @@ const router = createBrowserRouter([
             {
               path: 'viewerSigup',
               element: <ViewerSignup/>
+            },
+            {
+              path: 'verify',
+              element: <VerifyEmail/>
             }
           ]
         },
         {
           path: 'login',
           element: <Login/>
-        },
-        {
-          path: 'logout',
-          loader: () => {
-            const dispatch = useDispatch();
-            logout(dispatch);
-          }
         }
       ]
     }

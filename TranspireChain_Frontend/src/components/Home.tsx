@@ -1,7 +1,7 @@
-import Navbar from "./Navbar";
+import Login from "./Login";
 
 const Home = () => {
-    return <Navbar/>;
+    return <Login/>;
 }
 
 export default Home;

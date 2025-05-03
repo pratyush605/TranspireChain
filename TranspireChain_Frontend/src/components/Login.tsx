@@ -2,6 +2,7 @@ import { useState } from "react";
 import {login} from "../controller/authController";
 import { useDispatch } from "react-redux";
 import stylex from '@stylexjs/stylex';
+import { useNavigate } from "react-router-dom";
 
 const loginStyle = stylex.create({
     bg_img: {
@@ -35,15 +36,17 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     login(email, password, dispatch);
-    //redirect using useNvigate of react router
+    navigate('/');
   };
     return (
         <div className={stylex(loginStyle.bg_img)}>
             <div className={stylex(loginStyle.content)}>
-                <header className={stylex(loginStyle.header)}>Login Form</header>
+                <header className={stylex(loginStyle.header)}>Please Login !!!</header>
                 <form onSubmit={handleSubmit}>
                     <div className="border border-3 border-danger rounded mt-4 form-group">
                         <input className="form-control" type="email" placeholder="Email" onChange={(event) => setEmail(event.target.value)} />

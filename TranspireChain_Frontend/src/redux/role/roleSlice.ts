@@ -17,12 +17,10 @@ const roleSlice = createSlice({
         handleLogin: (state, action: PayloadAction<{token: string, role: string}>) => {
           state.token = action.payload.token;
           state.role = action.payload.role;
-          localStorage.setItem("role", action.payload.role);
         },
         handleLogout: (state) => {
           state.token = null;
           state.role = null;
-          localStorage.removeItem("role");
         },
     }
 });

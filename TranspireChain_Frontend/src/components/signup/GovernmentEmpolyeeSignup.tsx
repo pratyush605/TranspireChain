@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { governmentEmployeeSignup } from "../../controller/authController";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import stylex from "@stylexjs/stylex"
 
 const signupStyle = stylex.create({
@@ -40,11 +40,13 @@ const GovernmentEmployeeSignup = () => {
   const [address, setAddress] = useState("");
   const [departmentId, setDepartmentId] = useState("");
 
+  const navigate = useNavigate();
+
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     const userData = { memberId: id, username, email, password, phoneNumber, address, departmentId };
     governmentEmployeeSignup(userData);
-    //redirect using useNavigate of react router
+    navigate('/signup/verify');
   };
 
   return (

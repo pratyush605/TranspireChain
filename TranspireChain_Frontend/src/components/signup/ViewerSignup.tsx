@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { viewerSignup } from "../../controller/authController";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import stylex from "@stylexjs/stylex"
 
 const signupStyle = stylex.create({
@@ -38,11 +38,13 @@ const ViewerSignup = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [address, setAddress] = useState("");
 
+  const navigate = useNavigate();
+
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     const userData = { username, email, password, phoneNumber, address };
     viewerSignup(userData);
-    //redirect using useNavigate of react router
+    navigate('/signup/verify');
   };
 
   return (

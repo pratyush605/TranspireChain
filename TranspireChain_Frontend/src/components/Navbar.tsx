@@ -1,9 +1,12 @@
-import { useDispatch } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
 import { logout } from "../controller/authController";
+import { RootState } from "../redux/store";
 
 const Navbar = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const role = useSelector((state: RootState) => {return state.auth.role});
   return (
     <>
       <nav className="d-block navbar navbar-expand-lg bg-secondary bg-gradient">
@@ -29,38 +32,42 @@ const Navbar = () => {
                   Pricing
                 </NavLink>
               </li>
-              <li className="nav-item dropdown">
+              {!role && (<li className="nav-item dropdown">
                 <div className="nav-link dropdown-toggle text-white" data-bs-toggle="dropdown" aria-expanded="true" >
                   Signup
                 </div>
                 <ul className="dropdown-menu">
                   <li>
-                    <NavLink className={(isActive) => `dropdown-item ${isActive ? 'active' : ''}`} to="/signup/viewerSigup">
+                    <NavLink className="dropdown-item" to="/signup/viewerSigup">
                       Viewer Signup
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink className={(isActive) => `dropdown-item ${isActive ? 'active' : ''}`} to="/signup/contractorSignup">
+                    <NavLink className="dropdown-item" to="/signup/contractorSignup">
                       Contractor Signup
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink className={(isActive) => `dropdown-item ${isActive ? 'active' : ''}`} to="/signup/governmentSignup">
+                    <NavLink className="dropdown-item" to="/signup/governmentSignup">
                       Gov. Employee Signup
                     </NavLink>
                   </li>
                 </ul>
-              </li>
-              <li className="nav-item">
+              </li>)}
+              {!role && (<li className="nav-item">
                 <NavLink className={(isActive) => `nav-link text-white ${isActive ? 'active' : ''}`} to="/login">
                   Login
                 </NavLink>
-              </li>
-              <li className="nav-item">
-                <button className="nav-link text-white" onClick={() => {logout(dispatch)}}>
+              </li>)}
+              {role && (<li className="nav-item">
+                <button className="nav-link text-white"
+                onClick={() => {
+                  logout(dispatch);
+                  navigate('/');
+                }}>
                   Logout
                 </button>
-              </li>
+              </li>)}
             </ul>
           </div>
         </div>

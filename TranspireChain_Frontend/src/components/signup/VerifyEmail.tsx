@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {verifyEmail, resendEmail} from "../../controller/authController";
+import { useNavigate } from "react-router-dom";
 import stylex from "@stylexjs/stylex";
 
 const signupStyle = stylex.create({
@@ -34,6 +35,7 @@ const VerifyEmail = () => {
   const [action, setAction] = useState<string>('');
   const [email, setEmail] = useState("");
   const [verificationCode, setVerificationCode] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -43,7 +45,7 @@ const VerifyEmail = () => {
             return;
         }
         verifyEmail({email, verificationCode});
-        //redirect using useNvigate of react router
+        navigate('/login');
     } else {
         if (!email) {
             alert('Kindly fill the email and then click resend!!');

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { contractorSignup } from "../../controller/authController";
 import stylex from '@stylexjs/stylex';
 
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const signupStyle = stylex.create({
   bg_img: {
@@ -41,11 +41,13 @@ const ContractorSignup = () => {
   const [address, setAddress] = useState("");
   const [departmentId, setDepartmentId] = useState("");
 
+  const navigate = useNavigate();
+
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     const userData = { memberId: id, username, email, password, phoneNumber, address, departmentId };
     contractorSignup(userData);
-    //redirect using useNavigate of react router
+    navigate('/signup/verify');
   };
 
   return (

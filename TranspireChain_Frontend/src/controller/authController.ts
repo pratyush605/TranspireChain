@@ -1,5 +1,5 @@
-import axiosInstance, { setAuthToken } from "../config/axiosConfig";
-import { handleLogin, handleLogout } from "../redux/role/roleSlice";
+import axiosInstance, { setAuthToken } from "../utils/axiosConfig";
+import { handleLogin, handleLogout } from "../redux/roleSlice";
 import { AppDispatch } from "../redux/store";
 
 const login = async (email:string, password:string, dispatch: AppDispatch) => {

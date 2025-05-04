@@ -6,11 +6,13 @@ import ViewerSignup from "../components/signup/ViewerSignup";
 import Login from "../components/Login";
 import Navbar from "../components/Navbar";
 import VerifyEmail from "../components/signup/VerifyEmail";
+import AlertSlide from "../components/AlertSlide";
 
 const RootLayout = () => {
   return (
     <div className="d-block app">
       <Navbar />
+      <AlertSlide/>
       <main className="d-block pages">
         <Outlet />
       </main>

@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import roleReducer from "./role/roleSlice"; 
+import roleReducer from "./roleSlice";
+import commonReducer from "./commonSlice";
 
 const store = configureStore({
   reducer: {
     auth: roleReducer,
+    common: commonReducer,
   },
 });
 

@@ -2,6 +2,8 @@ import { useState } from "react";
 import {verifyEmail, resendEmail} from "../../controller/authController";
 import { useNavigate } from "react-router-dom";
 import stylex from "@stylexjs/stylex";
+import { showAlert } from "../../utils/common";
+import { useDispatch } from "react-redux";
 
 const signupStyle = stylex.create({
     bg_img: {
@@ -36,19 +38,20 @@ const VerifyEmail = () => {
   const [email, setEmail] = useState("");
   const [verificationCode, setVerificationCode] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     if(action === 'verify'){
         if (!email || !verificationCode) {
-            alert('All fields are required');
+            showAlert('All fields are required', dispatch);
             return;
         }
         verifyEmail({email, verificationCode});
         navigate('/login');
     } else {
         if (!email) {
-            alert('Kindly fill the email and then click resend!!');
+            showAlert('Kindly fill the email and then click resend!!', dispatch);
             return;
         }
         resendEmail(email);

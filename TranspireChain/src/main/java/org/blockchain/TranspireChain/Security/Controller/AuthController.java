@@ -52,7 +52,7 @@ public class AuthController {
     public ResponseEntity<?> login(@RequestBody LoginDTO loginDTO){
         String jwt = null;
         Object user = authService.login(loginDTO);
-        String role;
+        String role = "viewer";
         if(user != null){
             if(user instanceof Viewer viewer && viewer.isEnabled()){
                 jwt = jwtService.createToken(
@@ -94,7 +94,7 @@ public class AuthController {
             }
             redisTemplate.opsForValue().set(jwt, role, 30, TimeUnit.MINUTES);
         }
-        LoginResponse loginResponse = new LoginResponse(jwt, 1000*60*30);
+        LoginResponse loginResponse = new LoginResponse(jwt, role);
         return ResponseEntity.ok(loginResponse);
     }
 

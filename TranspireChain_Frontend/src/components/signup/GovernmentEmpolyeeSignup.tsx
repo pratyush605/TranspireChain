@@ -70,7 +70,7 @@ const GovernmentEmployeeSignup = () => {
             <input className="form-control" type="tel" placeholder="Phone number" id="phoneNumber" name="phoneNumber" value={phoneNumber} onChange={(event) => setPhoneNumber(event.target.value)} />
           </div>
           <div className="border border-3 border-danger rounded mt-4 form-group">
-            <input className="form-control" type="tel" placeholder="Address" id="address" name="address" value={address} onChange={(event) => setAddress(event.target.value)} />
+            <input className="form-control" type="text" placeholder="Address" id="address" name="address" value={address} onChange={(event) => setAddress(event.target.value)} />
           </div>
           <div className="border border-3 border-danger rounded mt-4 form-group">
             <input className="form-control" type="text" id="departmentId" name="departmentId" placeholder="Department Id" value={departmentId} onChange={(event) => setDepartmentId(event.target.value)} required />

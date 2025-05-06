@@ -8,6 +8,7 @@ import Navbar from "../components/Navbar";
 import VerifyEmail from "../components/signup/VerifyEmail";
 import AlertSlide from "../components/AlertSlide";
 import GetAllFunds from "../components/transactions/GetAllFunds";
+import AddFund from "../components/transactions/AddFund";
 
 const RootLayout = () => {
   return (
@@ -76,6 +77,14 @@ const router = createBrowserRouter([
         {
           path: 'readFund',
           element: <GetAllFunds url='readFund' label="Search by Transaction Id"/>
+        },
+        {
+          path: 'addFund',
+          element: <AddFund action="addFund"/>
+        },
+        {
+          path: 'updateFund',
+          element: <AddFund action="updateFund"/>
         }
       ]
     }

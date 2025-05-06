@@ -65,7 +65,7 @@ const ViewerSignup = () => {
             <input className="form-control" type="tel" placeholder="Phone Number" id="phoneNumber" name="phoneNumber" value={phoneNumber} onChange={(event) => setPhoneNumber(event.target.value)} />
           </div>
           <div className="border border-3 border-danger rounded mt-4  form-group">
-            <input className="form-control" type="tel" placeholder="Address" id="address" name="address" value={address} onChange={(event) => setAddress(event.target.value)} />
+            <input className="form-control" type="text" placeholder="Address" id="address" name="address" value={address} onChange={(event) => setAddress(event.target.value)} />
           </div>
           <button type="submit" className="mt-4 w-100 btn btn-danger">Submit</button>
         </form>

@@ -68,7 +68,7 @@ const VerifyEmail = () => {
                         }}/>
                     </div>
                     <div className="border border-3 border-danger rounded mt-4 form-group">
-                        <input className="form-control" name="verificationCode" placeholder="verificatoinCode" onChange={e => {
+                        <input type="text" className="form-control" name="verificationCode" placeholder="verificatoinCode" onChange={e => {
                             setVerificationCode(e.target.value);
                         }}/>
                     </div>

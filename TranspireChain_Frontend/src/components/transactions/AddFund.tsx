@@ -68,7 +68,7 @@ const AddFund = (props: propsType) => {
     return (
         <div className={stylex(addFundStyle.bg_img)}>
             <div className={stylex(addFundStyle.content)}>
-                <header className={stylex(addFundStyle.header)}>Government Employee Signup</header>
+                <header className={stylex(addFundStyle.header)}>Add Transaction</header>
                 <form onSubmit={handleSubmit}>
                     <div className="border border-3 border-danger rounded form-group">
                         <input className="form-control" type="text" id="transactionId" name="transactionId" placeholder="Transaction Id" value={transactionId} onChange={(event) => setTransactionId(event.target.value)}/>

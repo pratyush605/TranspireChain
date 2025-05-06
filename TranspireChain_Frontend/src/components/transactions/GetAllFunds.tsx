@@ -9,14 +9,9 @@ interface propsType {
     label: string
 }
 
-const GetAllFunds = async (props: propsType) => {
+const GetAllFunds = (props: propsType) => {
     const [searchQuery, setSearchQuery] = useState('');
     const [response, setResponse] = useState<fundType | Array<fundType>>();
-
-    if(props.url === 'getAllFunds') {
-        const result: Array<fundType> = await getAllFunds();
-        setResponse(result);
-    }
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();

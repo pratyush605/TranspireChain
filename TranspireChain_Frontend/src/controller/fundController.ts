@@ -36,7 +36,8 @@ const updateFund = async (fund: fundType) => {
 const readFund = async (transactionId: string) => {
     try{
         // response is the Object of Fund
-        const response = await axiosInstance.get(`/contract/readFund?transactionId=${transactionId}`);
+        const url = '/contract/readFund?transactionId=' + transactionId;
+        const response = await axiosInstance.get(url);
         if (response.status !== 200) {
             throw new Error("Could not get Funds");
         }
@@ -53,13 +54,13 @@ const getAllFunds = async (url='getAllFunds', searchQuery='') => {
         if (url === 'getAllFunds') {
             path = path + url;
         } else if (url === 'getAllFundsByProjectName') {
-            path = path + url + `?projectName=${searchQuery}`;
+            path = path + url + '?projectName=' + searchQuery;
         } else if (url === 'getAllFundsByDepartmentId') {
-            path = path + url + `?departmentId=${searchQuery}`;
+            path = path + url + '?departmentId=' + searchQuery;
         } else if (url === 'getAllFundsByEmployeeId') {
-            path = path + url + `?employeeId=${searchQuery}`;
+            path = path + url + '?employeeId=' + searchQuery;
         } else if (url === 'getAllFundsByContractorId') {
-            path = path + url + `?contractorId=${searchQuery}`;
+            path = path + url + '?contractorId=' + searchQuery;
         }
         const response = await axiosInstance.get(path);
         if (response.status !== 200) {

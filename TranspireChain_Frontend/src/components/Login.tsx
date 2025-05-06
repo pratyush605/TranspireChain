@@ -10,7 +10,7 @@ const loginStyle = stylex.create({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        height: '43rem',
+        height: '90.6vh',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundImage: "url('https://wallpapercave.com/wp/wp6509773.jpg')",

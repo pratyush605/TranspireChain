@@ -1,6 +1,8 @@
 import { useState } from "react"
 import { getAllFunds, readFund } from "../../controller/fundController";
 import fundType from "../../utils/types/fundType";
+import { showAlert } from "../../utils/common";
+import store from "../../redux/store";
 
 interface propsType {
     url: string,
@@ -16,13 +18,19 @@ const GetAllFunds = async (props: propsType) => {
         setResponse(result);
     }
 
-    const handleSubmit = async () => {
-        if (props.url === 'readFund') {
-            const result: fundType = await readFund(searchQuery);
-            setResponse(result);
-        } else {
-            const result: Array<fundType> = await getAllFunds(props.url, searchQuery);
-            setResponse(result);
+    const handleSubmit = async (event: React.FormEvent) => {
+        event.preventDefault();
+        try{
+            if (props.url === 'readFund') {
+                const result: fundType = await readFund(searchQuery);
+                setResponse(result);
+            } else {
+                const result: Array<fundType> = await getAllFunds(props.url, searchQuery);
+                setResponse(result);
+            }
+        } catch (error) {
+            console.error("Error while getting transaction data", error);
+            showAlert("Error while getting transaction data", store.dispatch);
         }
     }
 

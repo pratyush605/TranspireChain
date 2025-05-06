@@ -2,7 +2,8 @@ import { useState } from "react";
 import stylex from "@stylexjs/stylex"
 import { addFund, updateFund } from "../../controller/fundController";
 import { showAlert } from "../../utils/common";
-import store from "../../redux/store";
+import store, { RootState } from "../../redux/store";
+import { useSelector } from "react-redux";
 
 const addFundStyle = stylex.create({
   bg_img: {
@@ -44,15 +45,19 @@ const AddFund = (props: propsType) => {
     const [amount, setAmount] = useState("");
     const [projectName, setProjectName] = useState("");
 
+    const role = useSelector((state: RootState) => {return state.auth.role});
+
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
         try{
-            if (props.action === 'addFund') {
+            if ((role === 'governmentEmployee' || role === 'contractor') && props.action === 'addFund') {
                 await addFund({transactionId, departmentId, employeeId, contractorId, amount, projectName});
                 showAlert("Fund added successfully", store.dispatch);
-            } else if (props.action === 'updateFund') {
+            } else if ((role === 'governmentEmployee' || role === 'contractor') && props.action === 'updateFund') {
                 await updateFund({transactionId, departmentId, employeeId, contractorId, amount, projectName});
                 showAlert("Fund Updated successfully", store.dispatch);
+            } else if (role !== 'governmentEmployee' && role !== 'contractor') {
+                showAlert("Access Denied!!! Not authorised to add or update funds", store.dispatch);
             }
         } catch (error) {
             showAlert("Error while adding fund", store.dispatch, 'danger');

@@ -55,36 +55,48 @@ const router = createBrowserRouter([
           element: <Login/>
         },
         {
-          path: 'getAllFunds',
-          element: <GetAllFunds url='getAllFunds' label=""/>
+          path: 'queryTransaction',
+          children: [
+            {index: true},
+            {
+              path: 'getAllFunds',
+              element: <GetAllFunds url='getAllFunds' label=""/>
+            },
+            {
+              path: 'getAllFundsByProjectName',
+              element: <GetAllFunds url='getAllFundsByProjectName' label="Search by Project Name"/>
+            },
+            {
+              path: 'getAllFundsByDepartmentId',
+              element: <GetAllFunds url='getAllFundsByDepartmentId' label="Search by Department Id"/>
+            },
+            {
+              path: 'getAllFundsByEmployeeId',
+              element: <GetAllFunds url='getAllFundsByEmployeeId' label="Search by Employee Id"/>
+            },
+            {
+              path: 'getAllFundsByContractorId',
+              element: <GetAllFunds url='getAllFundsByContractorId' label="Search by Contractor Id"/>
+            },
+            {
+              path: 'readFund',
+              element: <GetAllFunds url='readFund' label="Search by Transaction Id"/>
+            }
+          ]
         },
         {
-          path: 'getAllFundsByProjectName',
-          element: <GetAllFunds url='getAllFundsByProjectName' label="Search by Project Name"/>
-        },
-        {
-          path: 'getAllFundsByDepartmentId',
-          element: <GetAllFunds url='getAllFundsByDepartmentId' label="Search by Department Id"/>
-        },
-        {
-          path: 'getAllFundsByEmployeeId',
-          element: <GetAllFunds url='getAllFundsByEmployeeId' label="Search by Employee Id"/>
-        },
-        {
-          path: 'getAllFundsByContractorId',
-          element: <GetAllFunds url='getAllFundsByContractorId' label="Search by Contractor Id"/>
-        },
-        {
-          path: 'readFund',
-          element: <GetAllFunds url='readFund' label="Search by Transaction Id"/>
-        },
-        {
-          path: 'addFund',
-          element: <AddFund action="addFund"/>
-        },
-        {
-          path: 'updateFund',
-          element: <AddFund action="updateFund"/>
+          path: 'transaction',
+          children: [
+            {index: true},
+            {
+              path: 'addFund',
+              element: <AddFund action="addFund"/>
+            },
+            {
+              path: 'updateFund',
+              element: <AddFund action="updateFund"/>
+            }
+          ]
         }
       ]
     }

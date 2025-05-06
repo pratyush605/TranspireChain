@@ -7,6 +7,7 @@ import Login from "../components/Login";
 import Navbar from "../components/Navbar";
 import VerifyEmail from "../components/signup/VerifyEmail";
 import AlertSlide from "../components/AlertSlide";
+import GetAllFunds from "../components/transactions/GetAllFunds";
 
 const RootLayout = () => {
   return (
@@ -51,6 +52,30 @@ const router = createBrowserRouter([
         {
           path: 'login',
           element: <Login/>
+        },
+        {
+          path: 'getAllFunds',
+          element: <GetAllFunds url='getAllFunds' label=""/>
+        },
+        {
+          path: 'getAllFundsByProjectName',
+          element: <GetAllFunds url='getAllFundsByProjectName' label="Search by Project Name"/>
+        },
+        {
+          path: 'getAllFundsByDepartmentId',
+          element: <GetAllFunds url='getAllFundsByDepartmentId' label="Search by Department Id"/>
+        },
+        {
+          path: 'getAllFundsByEmployeeId',
+          element: <GetAllFunds url='getAllFundsByEmployeeId' label="Search by Employee Id"/>
+        },
+        {
+          path: 'getAllFundsByContractorId',
+          element: <GetAllFunds url='getAllFundsByContractorId' label="Search by Contractor Id"/>
+        },
+        {
+          path: 'readFund',
+          element: <GetAllFunds url='readFund' label="Search by Transaction Id"/>
         }
       ]
     }

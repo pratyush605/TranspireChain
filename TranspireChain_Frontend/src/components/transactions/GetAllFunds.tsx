@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { getAllFunds, readFund } from "../../controller/fundController";
 import fundType from "../../utils/types/fundType";
 import { showAlert } from "../../utils/common";
@@ -12,6 +12,13 @@ interface propsType {
 const GetAllFunds = (props: propsType) => {
     const [searchQuery, setSearchQuery] = useState('');
     const [response, setResponse] = useState<fundType | Array<fundType>>();
+
+    const setInitialResponse = async () => {
+        if(props.url === 'getAllFunds') {
+            const result: Array<fundType> = await getAllFunds();
+            setResponse(result);
+        }
+    }
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
@@ -29,6 +36,10 @@ const GetAllFunds = (props: propsType) => {
         }
     }
 
+    useEffect(() => {
+        setInitialResponse();
+    }, [])
+    
     return (
         <>
             {props.url !== 'getAllFunds' && (<form onSubmit={handleSubmit}>

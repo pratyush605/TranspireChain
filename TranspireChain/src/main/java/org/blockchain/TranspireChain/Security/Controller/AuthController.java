@@ -52,7 +52,7 @@ public class AuthController {
     public ResponseEntity<?> login(@RequestBody LoginDTO loginDTO){
         String jwt = null;
         Object user = authService.login(loginDTO);
-        String role;
+        String role = "viewer";
         if(user != null){
             if(user instanceof Viewer viewer && viewer.isEnabled()){
                 jwt = jwtService.createToken(
@@ -94,7 +94,7 @@ public class AuthController {
             }
             redisTemplate.opsForValue().set(jwt, role, 30, TimeUnit.MINUTES);
         }
-        LoginResponse loginResponse = new LoginResponse(jwt, 1000*60*30);
+        LoginResponse loginResponse = new LoginResponse(jwt, role);
         return ResponseEntity.ok(loginResponse);
     }
 
@@ -117,4 +117,20 @@ public class AuthController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @GetMapping("/logout")
+    public ResponseEntity<?> logout(HttpServletRequest request) {
+        try{
+            final String authenticationHeader = request.getHeader("Authorization");
+            String jwt = "";
+            if(authenticationHeader != null && authenticationHeader.startsWith("Bearer ")) {
+                jwt = authenticationHeader.substring(7);
+            }
+            redisTemplate.delete(jwt);
+            return ResponseEntity.ok("LOGOUT SUCCESSFUL");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+    
 }

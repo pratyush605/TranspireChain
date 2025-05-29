@@ -2,11 +2,11 @@ package org.blockchain.TranspireChain.Security.Responses;
 
 public class LoginResponse {
     private String token;
-    private long expiresIn;
+    private String role;
 
-    public LoginResponse(String token, long expiresIn) {
+    public LoginResponse(String token, String role) {
         this.token = token;
-        this.expiresIn = expiresIn;
+        this.role = role;
     }
 
     public String getToken() {
@@ -17,11 +17,11 @@ public class LoginResponse {
         this.token = token;
     }
 
-    public long getExpiresIn() {
-        return expiresIn;
+    public String getRole() {
+        return this.role;
     }
 
-    public void setExpiresIn(long expiresIn) {
-        this.expiresIn = expiresIn;
+    public void setRole(String role) {
+        this.role = role;
     }
 }
